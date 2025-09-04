@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import json, re, sys
-from pathlib import Path
+
+import json
+import re
 from collections import defaultdict
+from pathlib import Path
 
 IN = Path("mimeData.json")
 OUT = Path("src/mime_enum/mimetype.py")
 
 # ---- helpers ---------------------------------------------------------------
+
 
 def sanitize_member_name(mime: str) -> str:
     # "application/vnd.hp-jlyt" -> "APPLICATION_VND_HP_JLYT"
@@ -16,18 +19,22 @@ def sanitize_member_name(mime: str) -> str:
         name = "MIME_" + name
     return name
 
+
 def strip_dot(ext: str) -> str:
     return ext.lstrip(".").lower()
+
 
 def is_vendor(mime: str) -> bool:
     # prefer non-vendor when deciding extension conflicts
     # (vendor types start with application/vnd., model/vnd., etc.)
     return "/vnd." in mime
 
+
 def choose_canonical_for_ext(candidates: list[str]) -> str:
     # Prefer non-vendor; otherwise first
     non_vendor = [m for m in candidates if not is_vendor(m)]
     return (non_vendor or candidates)[0]
+
 
 def py_tuple_str(items: list[str]) -> str:
     """Render a Python tuple literal from a list of strings."""
@@ -76,10 +83,7 @@ for m, data in entries.items():
         if ext:
             ext_to_mimes[ext].append(m)
 
-ext_to_mime: dict[str, str] = {
-    ext: choose_canonical_for_ext(mimes)
-    for ext, mimes in ext_to_mimes.items()
-}
+ext_to_mime: dict[str, str] = {ext: choose_canonical_for_ext(mimes) for ext, mimes in ext_to_mimes.items()}
 
 # ---- emit ------------------------------------------------------------------
 

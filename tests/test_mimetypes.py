@@ -1,18 +1,18 @@
 import pytest
 
 from mime_enum import (
-    parse,
-    try_parse,
+    MimeType,
     from_extension,
     from_path,
+    parse,
+    try_parse,
 )
-from mime_enum import MimeType
 from mime_enum.mimetype import _EXT_TO_MIME
-
 
 # -------------------------
 # Basic enum semantics
 # -------------------------
+
 
 def test_strenum_equality_and_str():
     assert MimeType.APPLICATION_JSON == "application/json"
@@ -32,14 +32,15 @@ def test_extensions_are_tuples_not_strings():
 # parse() & try_parse()
 # -------------------------
 
+
 @pytest.mark.parametrize(
     "value, expected",
     [
         ("application/json", MimeType.APPLICATION_JSON),
         ("application/json; charset=UTF-8", MimeType.APPLICATION_JSON),  # params stripped
-        (" text/html ; charset=iso-8859-1 ", MimeType.TEXT_HTML),        # whitespace + case
-        ("application/javascript", MimeType.TEXT_JAVASCRIPT),            # alias -> canonical
-        ("text/json", MimeType.APPLICATION_JSON),                        # alias -> canonical
+        (" text/html ; charset=iso-8859-1 ", MimeType.TEXT_HTML),  # whitespace + case
+        ("application/javascript", MimeType.TEXT_JAVASCRIPT),  # alias -> canonical
+        ("text/json", MimeType.APPLICATION_JSON),  # alias -> canonical
     ],
 )
 def test_parse_normalizes_and_strips_params(value, expected):
@@ -59,6 +60,7 @@ def test_parse_raises_on_unknown():
 # -------------------------
 # Extension lookups
 # -------------------------
+
 
 @pytest.mark.parametrize(
     "ext, expected",
@@ -83,12 +85,13 @@ def test_from_extension_compound_key_supported_when_in_map():
 # Path lookups
 # -------------------------
 
+
 @pytest.mark.parametrize(
     "path, expected",
     [
-        ("/tmp/report.PDF", MimeType.APPLICATION_PDF),       # case-insensitive suffix
-        ("C:\\x\\y\\z\\file.html", MimeType.TEXT_HTML),       # windows-ish path
-        ("archive.tgz", MimeType.APPLICATION_X_GZIP),         # simple suffix, no compound logic
+        ("/tmp/report.PDF", MimeType.APPLICATION_PDF),  # noqa: S108 case-insensitive suffix
+        ("C:\\x\\y\\z\\file.html", MimeType.TEXT_HTML),  # windows-ish path
+        ("archive.tgz", MimeType.APPLICATION_X_GZIP),  # simple suffix, no compound logic
     ],
 )
 def test_from_path_simple_suffix(path, expected):
@@ -107,6 +110,7 @@ def test_from_path_on_compound_suffix_current_behavior():
 # -------------------------
 # Map integrity (spot checks)
 # -------------------------
+
 
 def test_ext_map_contains_expected_examples():
     assert _EXT_TO_MIME["pdf"] is MimeType.APPLICATION_PDF

@@ -45,7 +45,7 @@ def set_content_type(mime: MimeType) -> str:
     return f"Content-Type: {mime}"
 ```
 
-### Flexible String Parsing  
+### Flexible String Parsing
 
 Parse real-world MIME type strings with automatic parameter stripping and alias normalization:
 
@@ -69,7 +69,7 @@ print(unknown)  # None
 
 Detect MIME types from file extensions and paths:
 
-```python  
+```python
 from mime_enum import from_extension, from_path
 
 # Look up by extension (with or without dot, case-insensitive)

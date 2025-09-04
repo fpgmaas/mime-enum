@@ -109,7 +109,8 @@
       "communityContributed": false,
       "popularUsage": null
     }
-  },{
+  },
+  {
     "name": "image/avif-sequence",
     "description": "AVIF (AV1 Image File Format) is an image and animation file format, an extension of <a href=\"/image/heif\">HEIF</a> allowing images encoded with AV1. Most files will only have AV1-encoded images, but a mixture of different encodings is allowed. Early draft versions were named AV1 Still Image File Format.",
     "furtherReading": [
@@ -356,7 +357,7 @@
   },
   {
     "name": "image/x-icns",
-    "description": "ICNS (often written in lowercase as icns) is the native icon format of Mac OS and OS X.<br /><br />It goes by many other names, including Apple Icon, Macintosh Icon, Mac OS Icon, Macintosh OS X Icon, Mac OS X Icon Resource, Mac OS icns Resource, and IconFamily Resource.<br /><br />There are usually multiple images in a file. Supported image sizes are 16×12, and 16, 32, 48, 128, 256, 512, and 1024 pixels square.",
+    "description": "ICNS (often written in lowercase as icns) is the native icon format of Mac OS and OS X.<br /><br />It goes by many other names, including Apple Icon, Macintosh Icon, Mac OS Icon, Macintosh OS X Icon, Mac OS X Icon Resource, Mac OS icns Resource, and IconFamily Resource.<br /><br />There are usually multiple images in a file. Supported image sizes are 16\u00d712, and 16, 32, 48, 128, 256, 512, and 1024 pixels square.",
     "furtherReading": [
       {
         "title": "Let's Solve the File Format Problem!",
@@ -5406,8 +5407,7 @@
       }
     ],
     "links": {
-      "deprecates": [
-      ],
+      "deprecates": [],
       "relatedTo": [],
       "parentOf": [
         "audio/x-aiff"
@@ -6619,7 +6619,7 @@
   },
   {
     "name": "application/yaml",
-    "description": "YAML (YAML Ain’t Markup Language) is a serialization format. It is a strict superset of JSON, with the addition of syntactically significant newlines and indentation, like Python. Unlike Python, however, YAML doesn’t allow literal tab characters for indentation. It is designed to be human-friendly and work well with modern programming languages for common everyday tasks. It is broadly useful for programming needs ranging from configuration files to Internet messaging to object persistence to data auditing. Together with the Unicode standard for characters, it is also well-suited for internationalization.",
+    "description": "YAML (YAML Ain\u2019t Markup Language) is a serialization format. It is a strict superset of JSON, with the addition of syntactically significant newlines and indentation, like Python. Unlike Python, however, YAML doesn\u2019t allow literal tab characters for indentation. It is designed to be human-friendly and work well with modern programming languages for common everyday tasks. It is broadly useful for programming needs ranging from configuration files to Internet messaging to object persistence to data auditing. Together with the Unicode standard for characters, it is also well-suited for internationalization.",
     "furtherReading": [
       {
         "title": "Internet Assigned Numbers Authority (IANA)",
@@ -7570,7 +7570,7 @@
   },
   {
     "name": "video/x-matroska",
-    "description": "Matroska (sometimes spelled Matroška) is an open standard multimedia container format. It is based on the EBML metaformat and can be used with a variety of compressed video formats.",
+    "description": "Matroska (sometimes spelled Matro\u0161ka) is an open standard multimedia container format. It is based on the EBML metaformat and can be used with a variety of compressed video formats.",
     "furtherReading": [
       {
         "title": "Let's Solve the File Format Problem!",
@@ -8127,7 +8127,7 @@
   },
   {
     "name": "text/x-pascal",
-    "description": "Pascal is an influential imperative and procedural programming language, designed in 1968–1969 and published in 1970. Borland's Turbo Pascal, and the later Borland Pascal, were popular in the 1980s and early 1990s on the PC/MS-DOS platform (CP/M versions were also released).",
+    "description": "Pascal is an influential imperative and procedural programming language, designed in 1968\u20131969 and published in 1970. Borland's Turbo Pascal, and the later Borland Pascal, were popular in the 1980s and early 1990s on the PC/MS-DOS platform (CP/M versions were also released).",
     "furtherReading": [
       {
         "title": "Let's Solve the File Format Problem!",
@@ -8985,7 +8985,7 @@
   },
   {
     "name": "application/prql",
-    "description": "PRQL is a modern language for transforming data — a simple, powerful, pipelined SQL replacement.",
+    "description": "PRQL is a modern language for transforming data \u2014 a simple, powerful, pipelined SQL replacement.",
     "furtherReading": [
       {
         "title": "Let's Solve the File Format Problem!",
@@ -9147,16 +9147,25 @@
       "deprecates": [],
       "relatedTo": [],
       "parentOf": [],
-      "alternativeTo": ["text/x-python-code", "text/x-python-script", "application/x-python-code", "application/x-python-script"]
+      "alternativeTo": [
+        "text/x-python-code",
+        "text/x-python-script",
+        "application/x-python-code",
+        "application/x-python-script"
+      ]
     },
     "fileTypes": [
-      ".py", ".pyc", ".pyo", ".pyd", ".whl"
+      ".py",
+      ".pyc",
+      ".pyo",
+      ".pyd",
+      ".whl"
     ],
     "furtherReading": [
-        {
-            "title": "Let's Solve the File Format Problem!",
-            "url": "http://fileformats.archiveteam.org/wiki/Python"
-        }
+      {
+        "title": "Let's Solve the File Format Problem!",
+        "url": "http://fileformats.archiveteam.org/wiki/Python"
+      }
     ],
     "notices": {
       "hasNoOfficial": true,
