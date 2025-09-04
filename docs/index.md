@@ -40,9 +40,6 @@ json_mime = MimeType.APPLICATION_JSON
 print(json_mime)  # "application/json"
 print(json_mime.extensions)  # ("json",)
 
-# Perfect for type hints and IDE support
-def set_content_type(mime: MimeType) -> str:
-    return f"Content-Type: {mime}"
 ```
 
 ### Flexible String Parsing

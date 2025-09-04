@@ -24,7 +24,7 @@ def test_extensions_are_tuples_not_strings():
     Guard-rail: the generator must emit tuples like ('ez',) not ('ez').
     If it emits plain strings, this will fail.
     """
-    for mt in MimeType:
+    for mt in MimeType:  # ty: ignore[not-iterable]
         assert isinstance(mt.extensions, tuple), f"{mt} .extensions should be tuple, got {type(mt.extensions)}"
 
 

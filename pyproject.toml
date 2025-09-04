@@ -5,13 +5,11 @@ description = "Type-safe MIME type enumeration for Python"
 authors = [{ name = "Florian Maas", email = "fpgmaas@gmail.com" }]
 readme = "README.md"
 keywords = ['mime', 'mime-type', 'file-extension', 'content-type', 'enum']
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.11,<4.0"
 classifiers = [
     "Intended Audience :: Developers",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -47,7 +45,7 @@ packages = ["src/mime_enum"]
 
 [tool.ty.environment]
 python = "./.venv"
-python-version = "3.9"
+python-version = "3.11"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
