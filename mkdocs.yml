@@ -1,0 +1,53 @@
+site_name: mime-enum
+repo_url: https://github.com/fpgmaas/mime-enum
+site_url: https://fpgmaas.github.io/mime-enum
+site_description: Type-safe MIME type enumeration with file extension support for Python
+site_author: Florian Maas
+edit_uri: edit/main/docs/
+repo_name: fpgmaas/mime-enum
+copyright: Maintained by <a href="https://fpgmaas.com">fpgmaas</a>.
+
+nav:
+  - Home: index.md
+  - Usage: usage.md
+  - API Reference: api.md
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["src/mime_enum"]
+theme:
+  name: material
+  feature:
+    tabs: true
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/fpgmaas/mime-enum
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/mime-enum
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
