@@ -42,6 +42,27 @@ print(json_mime.extensions)  # ("json",)
 
 ```
 
+### Convenient Aliases
+
+For commonly used MIME types with verbose names, convenient aliases are provided:
+
+```python
+# Microsoft Office formats - use short aliases instead of verbose names
+docx = MimeType.APPLICATION_DOCX  # vs APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT
+xlsx = MimeType.APPLICATION_XLSX  # vs APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET
+pptx = MimeType.APPLICATION_PPTX  # vs APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION
+
+# String representation shows the full MIME type
+print(docx)  # "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+print(xlsx)  # "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+print(pptx)  # "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+
+# All aliases point to the same enum instances
+assert MimeType.APPLICATION_DOCX is MimeType.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT
+
+# Available aliases: DOCX, XLSX, PPTX, DOTX, XLTX, POTX, PPSX, SLDX
+```
+
 ### Flexible String Parsing
 
 Parse real-world MIME type strings with automatic parameter stripping and alias normalization:

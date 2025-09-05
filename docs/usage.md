@@ -156,6 +156,9 @@ js_mime = from_extension("js")      # MimeType.TEXT_JAVASCRIPT
 # Document types
 pdf_mime = from_extension("pdf")    # MimeType.APPLICATION_PDF
 doc_mime = from_extension("doc")    # MimeType.APPLICATION_MSWORD
+docx_mime = from_extension("docx")  # MimeType.APPLICATION_DOCX
+xlsx_mime = from_extension("xlsx")  # MimeType.APPLICATION_XLSX
+pptx_mime = from_extension("pptx")  # MimeType.APPLICATION_PPTX
 txt_mime = from_extension("txt")    # MimeType.TEXT_PLAIN
 
 # Image types
@@ -224,4 +227,103 @@ path = Path("document.tar.gz")
 if path.name.endswith('.tar.gz'):
     # Handle as tar.gz specifically
     mime_type = MimeType.APPLICATION_X_TAR  # or your preferred handling
+```
+
+## Convenient Aliases
+
+### Overview
+
+For MIME types with particularly verbose names, the library provides convenient aliases that point to the exact same enum instances. These aliases improve code readability and reduce typing while maintaining full type safety.
+
+### Available Aliases
+
+The library currently provides aliases for Microsoft Office Open XML formats:
+
+```python
+from mime_enum import MimeType
+
+# Word Processing
+MimeType.APPLICATION_DOCX    # Word document
+MimeType.APPLICATION_DOTX    # Word template
+
+# Spreadsheets
+MimeType.APPLICATION_XLSX    # Excel spreadsheet
+MimeType.APPLICATION_XLTX    # Excel template
+
+# Presentations
+MimeType.APPLICATION_PPTX    # PowerPoint presentation
+MimeType.APPLICATION_POTX    # PowerPoint template
+MimeType.APPLICATION_PPSX    # PowerPoint slideshow
+MimeType.APPLICATION_SLDX    # PowerPoint slide
+```
+
+### Using Aliases
+
+Aliases work identically to their verbose counterparts:
+
+```python
+# These are the exact same objects
+docx_alias = MimeType.APPLICATION_DOCX
+docx_full = MimeType.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT
+assert docx_alias is docx_full  # True
+
+# String representation is identical
+print(docx_alias)  # "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+print(docx_full)   # "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
+# Extensions are the same
+print(docx_alias.extensions)  # ("docx",)
+print(docx_full.extensions)   # ("docx",)
+```
+
+### Aliases in Parsing and Lookups
+
+Aliases work seamlessly with all library functions:
+
+```python
+from mime_enum import parse, from_extension, from_path
+
+# Extension lookup returns the alias instance
+docx_mime = from_extension("docx")
+print(docx_mime is MimeType.APPLICATION_DOCX)  # True
+
+# Path lookup also returns the alias
+docx_path = from_path("/documents/report.docx")
+print(docx_path is MimeType.APPLICATION_DOCX)  # True
+
+# Parsing the full MIME string returns the alias
+parsed = parse("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+print(parsed is MimeType.APPLICATION_DOCX)  # True
+```
+
+### Benefits of Aliases
+
+1. **Improved Readability**: `APPLICATION_DOCX` is much easier to read than `APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT`
+
+2. **Less Typing**: Significantly shorter to type and autocomplete
+
+3. **Same Functionality**: All aliases point to the exact same enum instances, so they work identically in every context
+
+4. **IDE Support**: Full autocompletion and type checking support
+
+### Example: Working with Office Documents
+
+```python
+from mime_enum import MimeType, from_extension
+
+def process_office_document(file_path: str):
+    mime_type = from_extension(file_path)
+
+    if mime_type is MimeType.APPLICATION_DOCX:
+        return "Processing Word document"
+    elif mime_type is MimeType.APPLICATION_XLSX:
+        return "Processing Excel spreadsheet"
+    elif mime_type is MimeType.APPLICATION_PPTX:
+        return "Processing PowerPoint presentation"
+    else:
+        return "Unknown office document type"
+
+# Usage
+result = process_office_document("report.docx")
+print(result)  # "Processing Word document"
 ```

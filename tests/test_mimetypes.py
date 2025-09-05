@@ -120,3 +120,63 @@ def test_ext_map_contains_expected_examples():
     # sanity for alias-paired types living together
     assert "xhtml" in _EXT_TO_MIME
     assert _EXT_TO_MIME["xhtml"] is MimeType.APPLICATION_XHTML_XML
+
+
+# -------------------------
+# Alias functionality tests
+# -------------------------
+
+
+def test_aliases_are_same_instances():
+    """Test that aliases point to the exact same enum instances."""
+    # Microsoft Office formats
+    assert MimeType.APPLICATION_DOCX is MimeType.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT
+    assert MimeType.APPLICATION_XLSX is MimeType.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET
+    assert (
+        MimeType.APPLICATION_PPTX is MimeType.APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION
+    )
+
+
+def test_aliases_string_equality():
+    """Test that aliases work correctly as strings."""
+    assert MimeType.APPLICATION_DOCX == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    assert MimeType.APPLICATION_XLSX == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    assert MimeType.APPLICATION_PPTX == "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+
+
+@pytest.mark.parametrize(
+    "alias, expected_extensions",
+    [
+        (MimeType.APPLICATION_DOCX, ("docx",)),
+        (MimeType.APPLICATION_XLSX, ("xlsx",)),
+        (MimeType.APPLICATION_PPTX, ("pptx",)),
+        (MimeType.APPLICATION_DOTX, ("dotx",)),
+        (MimeType.APPLICATION_XLTX, ("xltx",)),
+        (MimeType.APPLICATION_POTX, ("potx",)),
+        (MimeType.APPLICATION_PPSX, ("ppsx",)),
+        (MimeType.APPLICATION_SLDX, ("sldx",)),
+    ],
+)
+def test_alias_extensions(alias, expected_extensions):
+    """Test that aliases maintain correct extension information."""
+    assert alias.extensions == expected_extensions
+
+
+def test_parse_returns_aliased_types():
+    """Test that parse() returns the same instances that aliases point to."""
+    # These should all return the same objects that our aliases point to
+    docx_parsed = parse("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    assert docx_parsed is MimeType.APPLICATION_DOCX
+
+    xlsx_parsed = parse("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    assert xlsx_parsed is MimeType.APPLICATION_XLSX
+
+
+def test_extension_lookup_works_with_aliases():
+    """Test that extension lookups return the same instances as aliases."""
+    assert from_extension("docx") is MimeType.APPLICATION_DOCX
+    assert from_extension(".docx") is MimeType.APPLICATION_DOCX
+    assert from_extension("DOCX") is MimeType.APPLICATION_DOCX
+
+    assert from_extension("xlsx") is MimeType.APPLICATION_XLSX
+    assert from_extension("pptx") is MimeType.APPLICATION_PPTX
