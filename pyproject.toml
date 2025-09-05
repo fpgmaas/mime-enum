@@ -17,7 +17,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://fpgmaas.github.io/mime-enum/"
+Homepage = "https://github.com/fpgmaas/mime-enum"
 Repository = "https://github.com/fpgmaas/mime-enum"
 Documentation = "https://fpgmaas.github.io/mime-enum/"
 
