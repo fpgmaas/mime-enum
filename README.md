@@ -103,3 +103,7 @@ mime_type = from_path("/path/to/document.pdf")  # MimeType.APPLICATION_PDF
 For detailed usage examples, see the [Usage Guide](docs/usage.md).
 
 For complete API documentation, see the [API Reference](docs/api.md).
+
+## Acknowledgments
+
+This project uses the `mimeData.json` file from [mimetype-io](https://github.com/patrickmccallum/mimetype-io) by Patrick McCallum.
