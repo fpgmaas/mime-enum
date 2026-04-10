@@ -180,3 +180,46 @@ def test_extension_lookup_works_with_aliases():
 
     assert from_extension("xlsx") is MimeType.APPLICATION_XLSX
     assert from_extension("pptx") is MimeType.APPLICATION_PPTX
+
+
+# -------------------------
+# Integration with standard library mimetypes
+# -------------------------
+
+
+def test_mimetypes_integration_guess_type():
+    """Test integration with Python's standard mimetypes library."""
+    import mimetypes
+
+    # Test that our enum values match standard library guesses
+    stdlib_type, _ = mimetypes.guess_type("test.json")
+    assert stdlib_type == str(MimeType.APPLICATION_JSON)
+
+    stdlib_type, _ = mimetypes.guess_type("test.html")
+    assert stdlib_type == str(MimeType.TEXT_HTML)
+
+    stdlib_type, _ = mimetypes.guess_type("test.pdf")
+    assert stdlib_type == str(MimeType.APPLICATION_PDF)
+
+
+def test_mimetypes_integration_guess_extension():
+    """Test that mimetypes can guess extensions for our MIME types."""
+    import mimetypes
+
+    # Test common MIME types
+    assert mimetypes.guess_extension(str(MimeType.APPLICATION_JSON)) == ".json"
+    assert mimetypes.guess_extension(str(MimeType.TEXT_HTML)) == ".html"
+    assert mimetypes.guess_extension(str(MimeType.APPLICATION_PDF)) == ".pdf"
+
+
+def test_mimetypes_integration_with_aliases():
+    """Test that stdlib mimetypes works with aliased MIME types."""
+    import mimetypes
+
+    # Test Office formats that have aliases
+    stdlib_type, _ = mimetypes.guess_type("document.docx")
+    if stdlib_type:  # Only test if stdlib knows about these
+        # Parse through our system to get the aliased type
+        parsed_type = try_parse(stdlib_type)
+        assert parsed_type is not None
+        assert parsed_type is MimeType.APPLICATION_DOCX

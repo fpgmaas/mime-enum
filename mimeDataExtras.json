@@ -1,0 +1,40 @@
+[
+  {
+    "name": "application/vnd.ms-outlook",
+    "description": "Microsoft Outlook message format.",
+    "links": {
+      "deprecates": [],
+      "relatedTo": [],
+      "parentOf": [],
+      "alternativeTo": []
+    },
+    "fileTypes": [
+      ".msg"
+    ],
+    "furtherReading": [],
+    "notices": {
+      "hasNoOfficial": false,
+      "communityContributed": true,
+      "popularUsage": null
+    }
+  },
+  {
+    "name": "application/vnd.ms-outlook-pst",
+    "description": "Microsoft Outlook personal storage table (PST) archive.",
+    "links": {
+      "deprecates": [],
+      "relatedTo": [],
+      "parentOf": [],
+      "alternativeTo": []
+    },
+    "fileTypes": [
+      ".pst"
+    ],
+    "furtherReading": [],
+    "notices": {
+      "hasNoOfficial": false,
+      "communityContributed": true,
+      "popularUsage": null
+    }
+  }
+]

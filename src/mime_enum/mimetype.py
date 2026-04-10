@@ -327,6 +327,8 @@ class MimeType(StrEnum):
     APPLICATION_VND_MS_HTMLHELP = ("application/vnd.ms-htmlhelp", ("chm",))
     APPLICATION_VND_MS_IMS = ("application/vnd.ms-ims", ("ims",))
     APPLICATION_VND_MS_LRM = ("application/vnd.ms-lrm", ("lrm",))
+    APPLICATION_VND_MS_OUTLOOK = ("application/vnd.ms-outlook", ("msg",))
+    APPLICATION_VND_MS_OUTLOOK_PST = ("application/vnd.ms-outlook-pst", ("pst",))
     APPLICATION_VND_MS_PKI_SECCAT = ("application/vnd.ms-pki.seccat", ("cat",))
     APPLICATION_VND_MS_PKI_STL = ("application/vnd.ms-pki.stl", ("stl",))
     APPLICATION_VND_MS_POWERPOINT = ("application/vnd.ms-powerpoint", ("pot", "ppa", "pps", "ppt", "pwz"))
@@ -1346,6 +1348,7 @@ _EXT_TO_MIME: dict[str, MimeType] = {
     "mseed": MimeType("application/vnd.fdsn.mseed"),
     "mseq": MimeType("application/vnd.mseq"),
     "msf": MimeType("application/vnd.epson.msf"),
+    "msg": MimeType("application/vnd.ms-outlook"),
     "msh": MimeType("model/mesh"),
     "msi": MimeType("application/x-msdownload"),
     "msl": MimeType("application/vnd.mobius.msl"),
@@ -1481,6 +1484,7 @@ _EXT_TO_MIME: dict[str, MimeType] = {
     "psb": MimeType("application/vnd.3gpp.pic-bw-small"),
     "psd": MimeType("image/vnd.adobe.photoshop"),
     "psf": MimeType("application/x-font-linux-psf"),
+    "pst": MimeType("application/vnd.ms-outlook-pst"),
     "ptid": MimeType("application/vnd.pvi.ptid1"),
     "ptx": MimeType("image/x-pentax-pef"),
     "pub": MimeType("application/x-mspublisher"),
