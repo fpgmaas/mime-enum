@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
 """Generate src/mime_enum/mimetype.py from the upstream mimeData.json dataset
 plus local additions in mimeDataExtras.json.
-
-The pipeline reads like a book:
-
-    1. load upstream + extras JSON
-    2. validate extras can be merged without shadowing or conflict
-    3. normalize merged data into Entry records and alias/ext lookup tables
-    4. validate Python enum member names are unique
-    5. render the target module
 """
 
 from __future__ import annotations
