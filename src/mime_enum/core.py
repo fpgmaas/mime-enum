@@ -42,14 +42,14 @@ def parse(value: str) -> MimeType:
         MimeType.APPLICATION_JSON
     """
     if not value:
-        raise ValueError("Empty MIME string")  # noqa: TRY003
+        raise ValueError("Empty MIME string")
     core = _strip_params(value)
     if core in _ALIASES:
         return _ALIASES[core]
     try:
         return MimeType(core)
     except ValueError as exc:
-        raise ValueError(f"Unknown MIME type: {value!r}") from exc  # noqa: TRY003
+        raise ValueError(f"Unknown MIME type: {value!r}") from exc
 
 
 def try_parse(value: str) -> MimeType | None:

@@ -34,6 +34,7 @@ dev = [
     "mkdocs-material>=8.5.10",
     "mkdocstrings[python]>=0.26.1",
     "marimo>=0.15.2",
+    "python-magic @ git+https://github.com/ddelange/python-magic.git@0.4.28.post9"
 ]
 
 [build-system]
@@ -93,6 +94,7 @@ ignore = [
     "E501",
     # DoNotAssignLambda
     "E731",
+    "TRY003"
 ]
 
 [tool.ruff.lint.per-file-ignores]
