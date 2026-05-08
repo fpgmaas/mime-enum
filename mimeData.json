@@ -13053,7 +13053,9 @@
     "name": "application/xml",
     "description": "",
     "links": {
-      "deprecates": [],
+      "deprecates": [
+        "text/xml"
+      ],
       "relatedTo": [],
       "parentOf": [],
       "alternativeTo": []

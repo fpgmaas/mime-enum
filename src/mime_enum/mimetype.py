@@ -895,6 +895,7 @@ _ALIASES: dict[str, MimeType] = {
     "text/x-python-script": MimeType("text/x-python"),
     "text/x-yaml": MimeType("application/yaml"),
     "text/x.gcode": MimeType("gcode"),
+    "text/xml": MimeType("application/xml"),
     "text/yaml": MimeType("application/yaml"),
 }
 
