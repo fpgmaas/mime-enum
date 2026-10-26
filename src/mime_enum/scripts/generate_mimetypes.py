@@ -41,6 +41,7 @@ def main() -> None:
     validate_extras(upstream, extras)
     entries, alias_to_target, ext_to_mime = normalize(upstream + extras)
     validate_member_names(entries)
+    validate_aliases(entries, alias_to_target)
 
     OUT.write_text(render_module(entries, alias_to_target, ext_to_mime))
     print(f"Wrote {OUT}")
@@ -103,6 +104,17 @@ def validate_member_names(entries: list[Entry]) -> None:
         seen[member] = entry.mime
 
 
+def validate_aliases(entries: list[Entry], alias_to_target: dict[str, str]) -> None:
+    """Every alias must resolve in one hop to a known member; a target that is
+    itself an alias would mean a chain or cycle (e.g. zip -> x-zip -> zip)."""
+    known = {e.mime for e in entries}
+    for alias, target in alias_to_target.items():
+        if target not in known:
+            raise ValueError(f"Alias {alias!r} points to unknown MIME type {target!r}")
+        if target in alias_to_target:
+            raise ValueError(f"Alias {alias!r} -> {target!r} chains to {alias_to_target[target]!r}")
+
+
 # ---- normalization ---------------------------------------------------------
 
 
@@ -123,7 +135,14 @@ def normalize(
         if not mime:
             continue
         extensions_by_mime.setdefault(mime, set()).update(file_types(item))
-        aliases_by_mime[mime].update(aliases_of(item, mime))
+        if item.get("deprecated"):
+            # Upstream links on deprecated entries point back at their own
+            # replacement, so only trust `useInstead` for direction.
+            target = str(item.get("useInstead") or "").strip().lower()
+            if target and target != mime:
+                aliases_by_mime[target].add(mime)
+        else:
+            aliases_by_mime[mime].update(aliases_of(item, mime))
 
     entries_in_order = [Entry(mime=mime, extensions=tuple(sorted(exts))) for mime, exts in extensions_by_mime.items()]
 
@@ -138,7 +157,9 @@ def _invert_alias_map(aliases_by_mime: dict[str, set[str]]) -> dict[str, str]:
     for target, aliases in aliases_by_mime.items():
         for alias in aliases:
             result.setdefault(alias, target)  # first-write-wins on dup alias
-    return result
+    # Two entries that deprecate each other carry no signal about which one is
+    # canonical; drop both directions so each resolves to itself.
+    return {alias: target for alias, target in result.items() if result.get(target) != alias}
 
 
 def _resolve_extension_owners(entries: list[Entry]) -> dict[str, str]:
