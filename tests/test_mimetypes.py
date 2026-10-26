@@ -47,6 +47,37 @@ def test_parse_normalizes_and_strips_params(value, expected):
     assert parse(value) is expected
 
 
+@pytest.mark.parametrize(
+    "value, expected",
+    [
+        # canonical types must resolve to themselves, not to a legacy alias
+        ("application/zip", MimeType.APPLICATION_ZIP),
+        ("application/vnd.rar", MimeType.APPLICATION_VND_RAR),
+        ("application/pkcs7-mime", MimeType.APPLICATION_PKCS7_MIME),
+        # mutually-deprecating pairs carry no direction, so each stays itself
+        ("application/gzip", MimeType.APPLICATION_GZIP),
+        ("application/x-gzip", MimeType.APPLICATION_X_GZIP),
+        ("font/otf", MimeType.FONT_OTF),
+        ("text/mathml", MimeType.TEXT_MATHML),
+        # deprecated types follow upstream's `useInstead`
+        ("application/x-zip-compressed", MimeType.APPLICATION_ZIP),
+        ("application/zip-compressed", MimeType.APPLICATION_ZIP),
+        ("application/x-rar-compressed", MimeType.APPLICATION_VND_RAR),
+        ("application/x-pkcs7-certreqresp", MimeType.APPLICATION_PKCS7_MIME),
+    ],
+)
+def test_parse_alias_direction(value, expected):
+    assert parse(value) is expected
+
+
+def test_alias_targets_are_not_aliases():
+    """An alias target that is itself aliased means a chain or cycle."""
+    from mime_enum.mimetype import _ALIASES
+
+    for alias, target in _ALIASES.items():
+        assert target not in _ALIASES, f"{alias} -> {target} -> {_ALIASES[target]}"
+
+
 @pytest.mark.parametrize("value", ["", "application/does-not-exist", "image/unknown-type"])
 def test_try_parse_unknown_returns_none(value):
     assert try_parse(value) is None
